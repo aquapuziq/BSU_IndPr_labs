@@ -42,7 +42,14 @@ class TaylorSeries {
             long fac_n = Calc_fac(n);
             double term = Calc_pow(x, n) / fac_n;
 
+            double term_abs = Calc_abs(term);
+            if (term_abs < eps){
+                break;
+            } else {
+                shx += term;
+            }
         }
+        return shx;
     }
 }
 public class Main {
@@ -65,8 +72,13 @@ public class Main {
                 System.out.println("Ошибка: введите корректное число");
                 in.nextLine();
             } catch (IllegalArgumentException e) {
-                System.out.println("Ошибка: число должно быть натуральным");
+                System.out.println("Ошибка: число k должно быть натуральным");
             }
         }
+        TaylorSeries sinhx = new TaylorSeries();
+        double mySinhx = sinhx.Calc_sinh(x, k);
+        System.out.println("Значение sinhx вычисленное приближенно: " + mySinhx);
+        double stSinhx = Math.sinh(x);
+        System.out.print("Значение sinhx вычисленное через стандартную функцию Java: " + stSinhx);
     }
 }
