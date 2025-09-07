@@ -42,7 +42,7 @@ public class TaylorSeries {
         return epsilon;
     }
 
-    private static double myPow(double x, int n) {
+    private static double pow(double x, int n) {
         double pow_x = 1;
         for (int i = 0; i < n; i++) {
             pow_x *= x;
@@ -58,7 +58,7 @@ public class TaylorSeries {
         return factorial_x;
     }
 
-    private static double myAbs(double x) {
+    private static double abs(double x) {
         if (x < 0){
             x *= (-1);
         }
@@ -71,8 +71,8 @@ public class TaylorSeries {
         for (int i = 0; ; i++){
             int n = i * 2 + 1;
             long factorial_n = calculationFactorial(n);
-            double term = myPow(x, n) / factorial_n;
-            double term_abs = myAbs(term);
+            double term = pow(x, n) / factorial_n;
+            double term_abs = abs(term);
 
             if (term_abs > Double.MAX_VALUE){
                 System.out.println("Ошибка: при вычислении очередного слагаемого, его значение" +
