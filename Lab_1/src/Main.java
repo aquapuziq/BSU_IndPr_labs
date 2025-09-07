@@ -11,12 +11,38 @@ class TaylorSeries {
         return eps;
     }
 
-    private static double Calc_fac(int n){
-        double fac_x = 1;
+    private static double Calc_pow(double x, int n) {
+        double pow_x = 1;
+        for (int i = 0; i < n; i++) {
+            pow_x *= x;
+        }
+        return pow_x;
+    }
+
+    private static long Calc_fac(int n){
+        long fac_x = 1;
         for (int i = 2; i <= n; i++) {
             fac_x *= i;
         }
         return fac_x;
+    }
+
+    private static double Calc_abs(double x) {
+        if (x < 0){
+            x *= (-1);
+        }
+        return x;
+    }
+
+    public static double Calc_sinh(double x, int k) {
+        double shx = 0;
+        double eps = Calc_eps(k);
+        for (int i = 0; ; i++){
+            int n = i * 2 + 1;
+            long fac_n = Calc_fac(n);
+            double term = Calc_pow(x, n) / fac_n;
+
+        }
     }
 }
 public class Main {
