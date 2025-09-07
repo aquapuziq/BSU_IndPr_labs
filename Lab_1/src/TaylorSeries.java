@@ -1,4 +1,38 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class TaylorSeries {
+
+    public static void startProgram(){
+        int k = 0; float x = 0;
+        Scanner in = new Scanner(System.in);
+
+        while (true) {
+            try {
+                System.out.print("Введите значение k: ");
+                k = in.nextInt();
+                System.out.print("Введите значение x: ");
+                x = in.nextFloat();
+                if (k <= 0) {
+                    throw new IllegalArgumentException();
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: введите число корректно\n");
+                in.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ошибка: число k должно быть натуральным\n");
+            }
+        }
+
+        double mySinhx = mySinh(x, k);
+        String res_1 = String.format("%.3f", mySinhx);
+        System.out.println("Значение sinhx вычисленное приближенно: " + res_1);
+
+        double stSinhx = Math.sinh(x);
+        String res_2 = String.format("%.3f", stSinhx);
+        System.out.print("Значение sinhx вычисленное через стандартную функцию Java: " + res_2);
+    }
 
     private static double calculationEpsilon(int k) {
         double epsilon = 1;
@@ -31,26 +65,26 @@ public class TaylorSeries {
         return x;
     }
 
-    public static double mySinh(double x, int k) {
+    private static double mySinh(double x, int k) {
         double shx = 0;
         double epsilon = calculationEpsilon(k);
         for (int i = 0; ; i++){
             int n = i * 2 + 1;
             long factorial_n = calculationFactorial(n);
             double term = myPow(x, n) / factorial_n;
-
             double term_abs = myAbs(term);
 
             if (term_abs > Double.MAX_VALUE){
                 System.out.println("Ошибка: при вычислении очередного слагаемого, его значение" +
-                        "\nвышло за пределы размерности типа данных double");
+                        "\nвышло за пределы размерности типа данных double\n");
+
+                shx += term;
                 break;
             }
             if (term_abs < epsilon){
                 break;
-            } else {
-                shx += term;
             }
+            shx += term;
         }
         return shx;
     }
