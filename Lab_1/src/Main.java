@@ -77,8 +77,10 @@ public class Main {
         }
         TaylorSeries sinhx = new TaylorSeries();
         double mySinhx = sinhx.Calc_sinh(x, k);
-        System.out.println("Значение sinhx вычисленное приближенно: " + mySinhx);
+        String res_1 = String.format("%.3f", mySinhx);
+        System.out.println("Значение sinhx вычисленное приближенно: " + res_1);
         double stSinhx = Math.sinh(x);
-        System.out.print("Значение sinhx вычисленное через стандартную функцию Java: " + stSinhx);
+        String res_2 = String.format("%.3f", stSinhx);
+        System.out.print("Значение sinhx вычисленное через стандартную функцию Java: " + res_2);
     }
 }
