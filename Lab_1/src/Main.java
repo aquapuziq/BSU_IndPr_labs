@@ -43,6 +43,12 @@ class TaylorSeries {
             double term = myPow(x, n) / factorial_n;
 
             double term_abs = myAbs(term);
+
+            if (term_abs > Double.MAX_VALUE){
+                System.out.println("Ошибка: при вычислении очередного слагаемого, его значение" +
+                        "\nвышло за пределы размерности типа данных double");
+                break;
+            }
             if (term_abs < epsilon){
                 break;
             } else {
