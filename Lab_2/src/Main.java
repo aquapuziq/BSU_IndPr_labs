@@ -8,6 +8,10 @@ import java.util.Collections;
 public class Main {
 
     public static int calculateDiagonallySum(int[][] matrix){
+        if (matrix == null || matrix.length == 0) {
+            throw new IllegalArgumentException("Матрица пустая или null");
+        }
+
         int sum = 0;
         int dim = matrix.length;
         for (int i = 0; i < dim; i++) {
