@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Math;
+import java.util.Collections;
 
 public class Main {
 
@@ -35,7 +36,7 @@ public class Main {
         return newMatrix;
     }
 
-    public static List<Integer> Sums (List<Integer> sums, int[][] matrix){
+    public static List<Integer> sumsOfDiagonals (List<Integer> sums, int[][] matrix){
         int dim = matrix.length;
         for(int i = 1; i < dim; i++){
             int[][] tmpUpMatrix = resizeUpMatrix(matrix, dim - i);
@@ -56,7 +57,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         Random rand = new Random();
 
-        int topNum = 100;
+        int topNum = 99, bottomNum = - 99;
 
         System.out.print("Введите размерность матрицы: ");
         int dim = in.nextInt();
@@ -65,14 +66,18 @@ public class Main {
 
         for(int i = 0; i < dim; ++i) {
             for(int j = 0; j < dim; ++j) {
-                matrix[i][j] = rand.nextInt(topNum);
+                matrix[i][j] = rand.nextInt(topNum - bottomNum + 1) + bottomNum;
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.print("\n");
         }
+
         List<Integer> elementsSums = new ArrayList<>();
-        elementsSums = Sums(elementsSums, matrix);
+        elementsSums = sumsOfDiagonals(elementsSums, matrix);
         System.out.println("Суммы модулей элементов диагоналей," +
                 " параллельных побочной диагонали: " + elementsSums);
+
+        int minNum = Collections.min(elementsSums);
+        System.out.println("Минимальная сумма модулей диагонали: " + minNum);
     }
 }
