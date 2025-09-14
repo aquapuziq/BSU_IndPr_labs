@@ -1,9 +1,6 @@
-import java.util.Random;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.lang.Math;
-import java.util.Collections;
+import java.util.InputMismatchException;
 
 public class Main {
 
@@ -61,11 +58,23 @@ public class Main {
         Scanner in = new Scanner(System.in);
         Random rand = new Random();
 
-        int topNum = 99, bottomNum = - 99;
+        int dim = 0, topNum = 99, bottomNum = - 99;
+        while (true) {
+            try {
+                System.out.print("Введите размерность матрицы: ");
+                dim = in.nextInt();
 
-        System.out.print("Введите размерность матрицы: ");
-        int dim = in.nextInt();
-
+                if (dim <= 0) {
+                    throw new IllegalArgumentException();
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: введите число корректно\n");
+                in.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ошибка: число размерности должно быть натуральным\n");
+            }
+        }
         int[][] matrix = new int[dim][dim];
 
         for(int i = 0; i < dim; ++i) {
