@@ -3,10 +3,15 @@ import java.util.Scanner;
 
 public class Main {
 
-//    public static int calculateDiagonalySum(int[][] matrix, int n){
-//        int sum = 0;
-//        return sum;
-//    }
+    public static int calculateDiagonallySum(int[][] matrix){
+        int sum = 0;
+        int dim = matrix.length;
+        for (int i = 0; i < dim; i++) {
+            sum += matrix[i][dim - 1 - i];
+        }
+        return sum;
+    }
+
     public static int[][] resizeMatrix(int[][] matrix, int newDim){
         int newMatrix[][] = new int[newDim][newDim];
         for(int i = 0; i < newDim; ++i) {
@@ -36,11 +41,7 @@ public class Main {
             System.out.print("\n");
         }
         int[][] matrixTmp = resizeMatrix(matrix, dim - 1);
-        for(int i = 0; i < dim - 1; ++i) {
-            for(int j = 0; j < dim - 1; ++j) {
-                System.out.print(matrixTmp[i][j] + " ");
-            }
-            System.out.print("\n");
-        }
+        int sum = calculateDiagonallySum(matrixTmp);
+        System.out.print(sum);
     }
 }
