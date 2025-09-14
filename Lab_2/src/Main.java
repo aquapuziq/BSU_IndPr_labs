@@ -1,9 +1,11 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
-    public static int calculateDiagonallySum(int[][] matrix){
+    public static int calculateUpperDiagonallySum(int[][] matrix){
         int sum = 0;
         int dim = matrix.length;
         for (int i = 0; i < dim; i++) {
@@ -20,6 +22,16 @@ public class Main {
             }
         }
         return newMatrix;
+    }
+
+    public static List<Integer> upperSums (List<Integer> sums, int[][] matrix){
+        int dim = matrix.length;
+        for(int i = 1; i < dim; i++){
+            int[][] tmpMatrix = resizeMatrix(matrix, dim - i);
+            int tmpSum = calculateUpperDiagonallySum(tmpMatrix);
+            sums.add(tmpSum);
+        }
+        return sums;
     }
 
     public static void main(String[] args) {
@@ -40,8 +52,8 @@ public class Main {
             }
             System.out.print("\n");
         }
-        int[][] matrixTmp = resizeMatrix(matrix, dim - 1);
-        int sum = calculateDiagonallySum(matrixTmp);
-        System.out.print(sum);
+        List<Integer> elementsSums = new ArrayList<>();
+        elementsSums = upperSums(elementsSums, matrix);
+        System.out.println(elementsSums);
     }
 }
