@@ -30,6 +30,12 @@ public class Main {
             String[] words = line.split(" ");
 
             for (String word : words){
+                char lastChar = word.charAt(word.length() - 1);
+
+                if(lastChar == '.' || lastChar == ','){
+                    word = word.substring(0, word.length() - 1);
+                }
+
                 if (!checkWordOrNum(word)){
                     resLine.append(word).append(" ");
                 }
