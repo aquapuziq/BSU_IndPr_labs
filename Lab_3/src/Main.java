@@ -5,14 +5,14 @@ import java.util.List;
 public class Main {
 
     public static boolean checkWordOrNum(String word) {
-        if (word.isEmpty()) return false;
+        if (word.isEmpty()) return true;
 
         for (int i = 0; i < word.length(); i++) {
             if (!Character.isDigit(word.charAt(i))) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public static StringBuilder deleteNumsInLine(String line){
@@ -24,10 +24,10 @@ public class Main {
             if(lastChar == '.' || lastChar == ','){
                 word = word.substring(0, word.length() - 1);
 
-                if (!checkWordOrNum(word)){
+                if (checkWordOrNum(word)){
                     resLine.append(word).append(lastChar).append(" ");
                 } else {
-                    if(resLine.length() > 0 && resLine.charAt(resLine.length() - 1) == ' '){
+                    if(!resLine.isEmpty() && resLine.charAt(resLine.length() - 1) == ' '){
                         resLine.deleteCharAt(resLine.length() - 1);
                     }
                     resLine.append(lastChar).append(" ");
@@ -35,7 +35,7 @@ public class Main {
                 continue;
             }
 
-            if (!checkWordOrNum(word)){
+            if (checkWordOrNum(word)){
                 resLine.append(word).append(" ");
             }
 
