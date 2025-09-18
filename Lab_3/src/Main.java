@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
 
-    private static boolean checkWordOrNum(String word) {
+    public static boolean checkWordOrNum(String word) {
         if (word.isEmpty()) return false;
 
         for (int i = 0; i < word.length(); i++) {
@@ -13,6 +13,34 @@ public class Main {
             }
         }
         return true;
+    }
+
+    public static StringBuilder deleteNumsInLine(String line){
+        StringBuilder resLine = new StringBuilder();
+        String[] words = line.split(" ");
+
+        for (String word : words){
+            char lastChar = word.charAt(word.length() - 1);
+            if(lastChar == '.' || lastChar == ','){
+                word = word.substring(0, word.length() - 1);
+
+                if (!checkWordOrNum(word)){
+                    resLine.append(word).append(lastChar).append(" ");
+                } else {
+                    if(resLine.length() > 0 && resLine.charAt(resLine.length() - 1) == ' '){
+                        resLine.deleteCharAt(resLine.length() - 1);
+                    }
+                    resLine.append(lastChar).append(" ");
+                }
+                continue;
+            }
+
+            if (!checkWordOrNum(word)){
+                resLine.append(word).append(" ");
+            }
+
+        }
+        return resLine;
     }
 
     public static void main(String[] args) {
@@ -25,21 +53,8 @@ public class Main {
             if (line.isEmpty()){
                 break;
             }
+            StringBuilder resLine = deleteNumsInLine(line);
 
-            StringBuilder resLine = new StringBuilder();
-            String[] words = line.split(" ");
-
-            for (String word : words){
-                char lastChar = word.charAt(word.length() - 1);
-
-                if(lastChar == '.' || lastChar == ','){
-                    word = word.substring(0, word.length() - 1);
-                }
-
-                if (!checkWordOrNum(word)){
-                    resLine.append(word).append(" ");
-                }
-            }
             lines.add(resLine);
         }
         String text = String.join("\n", lines);
