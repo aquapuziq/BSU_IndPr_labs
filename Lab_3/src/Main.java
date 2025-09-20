@@ -20,25 +20,21 @@ public class Main {
         String[] words = line.split(" ");
 
         for (String word : words){
-            char lastChar = word.charAt(word.length() - 1);
-            if(lastChar == '.' || lastChar == ','){
-                word = word.substring(0, word.length() - 1);
-
-                if (checkWordOrNum(word)){
-                    resLine.append(word).append(lastChar).append(" ");
-                } else {
-                    if(!resLine.isEmpty() && resLine.charAt(resLine.length() - 1) == ' '){
-                        resLine.deleteCharAt(resLine.length() - 1);
-                    }
-                    resLine.append(lastChar).append(" ");
+            if (word.matches("^[,.]*\\d+[,.]*$")){
+                String punctuation = word.replaceAll("\\d+", "");
+                if(!punctuation.isEmpty()){
+                    resLine.append(" ").append(punctuation);
                 }
                 continue;
             }
 
-            if (checkWordOrNum(word)){
-                resLine.append(word).append(" ");
+            if(!checkWordOrNum(word)){
+                continue;
             }
 
+            if (!word.isEmpty()){
+                resLine.append(" ").append(word);
+            }
         }
         return resLine;
     }
@@ -47,7 +43,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         List<StringBuilder> lines = new ArrayList<>();
 
-        System.out.println("Введите текст для форматировнаия:");
+        System.out.println("Введите текст для форматирования:");
         while(true) {
             String line = in.nextLine();
             if (line.isEmpty()){
@@ -58,6 +54,7 @@ public class Main {
             lines.add(resLine);
         }
         String text = String.join("\n", lines);
+        System.out.println("Текст после форматирования: ");
         System.out.print(text);
     }
 }
