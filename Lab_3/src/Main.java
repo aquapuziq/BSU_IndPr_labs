@@ -23,7 +23,7 @@ public class Main {
             if (word.matches("^[,.]*\\d+[,.]*$")){
                 String punctuation = word.replaceAll("\\d+", "");
                 if(!punctuation.isEmpty()){
-                    resLine.append(" ").append(punctuation);
+                    resLine.append(punctuation);
                 }
                 continue;
             }
@@ -33,7 +33,10 @@ public class Main {
             }
 
             if (!word.isEmpty()){
-                resLine.append(" ").append(word);
+                if(!resLine.isEmpty()){
+                    resLine.append(" ");
+                }
+                resLine.append(word);
             }
         }
         return resLine;
@@ -49,8 +52,8 @@ public class Main {
             if (line.isEmpty()){
                 break;
             }
-            StringBuilder resLine = deleteNumsInLine(line);
 
+            StringBuilder resLine = deleteNumsInLine(line);
             lines.add(resLine);
         }
         String text = String.join("\n", lines);
