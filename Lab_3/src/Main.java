@@ -5,14 +5,7 @@ import java.util.List;
 public class Main {
 
     public static boolean checkWordOrNum(String word) {
-        if (word.isEmpty()) return true;
-
-        for (int i = 0; i < word.length(); i++) {
-            if (!Character.isDigit(word.charAt(i))) {
-                return true;
-            }
-        }
-        return false;
+        return word.matches("\\d+");
     }
 
     public static StringBuilder deleteNumsInLine(String line){
@@ -28,7 +21,7 @@ public class Main {
                 continue;
             }
 
-            if(!checkWordOrNum(word)){
+            if(checkWordOrNum(word)){
                 continue;
             }
 
