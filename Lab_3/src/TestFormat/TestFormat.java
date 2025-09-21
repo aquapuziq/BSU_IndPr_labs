@@ -21,7 +21,6 @@ public class TestFormat {
         assertEquals(line, Main.deleteNumsInLine(line).toString());
 
         String lineWithNums = "Test 123 numLine. Hello, a4 World. 23. ,,244";
-        String resLine = "Test numLine. Hello, a4 World..,,";
-        assertEquals(resLine, Main.deleteNumsInLine(lineWithNums).toString());
+        assertEquals("Test numLine. Hello, a4 World..,,", Main.deleteNumsInLine(lineWithNums).toString());
     }
 }
