@@ -45,7 +45,7 @@ public class ProcessingText {
                 break;
             }
 
-            StringBuilder resLine = ProcessingText.deleteNumsInLine(line);
+            StringBuilder resLine = deleteNumsInLine(line);
             lines.add(resLine);
         }
         String text = String.join("\n", lines);

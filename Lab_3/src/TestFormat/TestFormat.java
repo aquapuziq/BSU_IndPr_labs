@@ -26,8 +26,4 @@ public class TestFormat {
         String lineWithNums = "Test 123 numLine. Hello, a4 World. 23. ,,244";
         assertEquals("Test numLine. Hello, a4 World..,,", ProcessingText.deleteNumsInLine(lineWithNums).toString());
     }
-
-    @Test
-    void testInitialization(){
-    }
 }
