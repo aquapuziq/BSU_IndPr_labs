@@ -5,22 +5,29 @@ public class TestFormat {
 
     @Test
     void testCheckWordOrNum(){
-        String word = "test";
-        assertFalse(Main.checkWordOrNum(word));
+        String word1 = "test";
+        assertFalse(ProcessingText.checkWordOrNum(word1));
+
+        String word2 = "te23st";
+        assertFalse(ProcessingText.checkWordOrNum(word2));
 
         String numWord = "123";
-        assertTrue(Main.checkWordOrNum(numWord));
+        assertTrue(ProcessingText.checkWordOrNum(numWord));
 
         String numWordWithPunctuation = "..123.,,";
-        assertFalse(Main.checkWordOrNum(numWordWithPunctuation));
+        assertFalse(ProcessingText.checkWordOrNum(numWordWithPunctuation));
     }
 
     @Test
     void testDeleteNumsInLine(){
         String line = "Test line. Hello, World.";
-        assertEquals(line, Main.deleteNumsInLine(line).toString());
+        assertEquals(line, ProcessingText.deleteNumsInLine(line).toString());
 
         String lineWithNums = "Test 123 numLine. Hello, a4 World. 23. ,,244";
-        assertEquals("Test numLine. Hello, a4 World..,,", Main.deleteNumsInLine(lineWithNums).toString());
+        assertEquals("Test numLine. Hello, a4 World..,,", ProcessingText.deleteNumsInLine(lineWithNums).toString());
+    }
+
+    @Test
+    void testInitialization(){
     }
 }
