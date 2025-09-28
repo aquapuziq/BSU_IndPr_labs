@@ -21,16 +21,14 @@ public class DeleteComments {
         System.out.print(codeWithoutComments);
     }
 
-    private static String deleteComments(String code){
+    public static String deleteComments(String code){
         if (code == null){
             System.out.println("Код не был введен");
             return "";
         }
 
-        code = code.replaceAll("//.*", "");
+        code = code.replaceAll("\\s*//.*", "");
         code = code.replaceAll("/\\*[\\s\\S]*?\\*/", "");
-        code = code.replaceAll("/\\*[\\s\\S]*?\\*/", "");
-
         return code;
     }
 }
