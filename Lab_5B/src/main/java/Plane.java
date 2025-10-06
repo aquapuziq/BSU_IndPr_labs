@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 class Segment {
@@ -53,19 +54,25 @@ public class Plane {
     }
 
     public static Point findMinIntersection(List<Segment> segments){
-        TreeMap<Double, Point> intersections = new TreeMap<>();
+        TreeMap<Double, List<Point>> intersections = new TreeMap<>();
         for (int i = 0; i < segments.size(); i++) {
             for (int j = i + 1; j < segments.size(); j++) {
                 Point p = getIntersection(segments.get(i), segments.get(j));
                 if (p != null) {
-                    intersections.put(p.x, p);
+                    intersections.putIfAbsent(p.x, new ArrayList<>());
+                    intersections.get(p.x).add(p);
                 }
             }
         }
 
         if (intersections.isEmpty()) return null;
-        return intersections.firstEntry().getValue();
+        double minX = intersections.firstKey();
+        List<Point> pointsAtMinX = intersections.get(minX);
+        pointsAtMinX.sort(Comparator.comparingDouble(pt -> pt.y));
+
+        return pointsAtMinX.get(0);
     }
+
 
     private static Point getIntersection(Segment s1, Segment s2) {
         double x1 = s1.x1, y1 = s1.y1, x2 = s1.x2, y2 = s1.y2;
