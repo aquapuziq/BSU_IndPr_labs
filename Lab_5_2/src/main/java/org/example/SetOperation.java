@@ -1,11 +1,6 @@
 package org.example;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.Scanner;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.IOException;
+import java.io.*;
+import java.util.*;
 
 class InvalidFileName extends Exception {
     public InvalidFileName(String message) {
@@ -54,9 +49,39 @@ public class SetOperation {
             return;
         }
 
+        boolean status = true;
+        while (status) {
+            System.out.println("\nВыберите операцию:");
+            System.out.println("1 — Объединение");
+            System.out.println("2 — Пересечение");
+            System.out.println("3 — Разность");
+
+            String operation = in.nextLine();
+            List<Student> result = new ArrayList<>();
+            switch (operation) {
+                case "1":
+                    result = union(list1, list2);
+                    saveResult(result, "output.txt");
+                    System.out.println("Операция объединения завершена");
+                    status = false;
+                    break;
+//                case "2":
+//                    result = intersection(list1, list2);
+//                    saveResult(result, "intersection_result.txt");
+//                    System.out.println("Операция пересечения завершена.");
+//                    break;
+//                case "3":
+//                    result = difference(list1, list2);
+//                    saveResult(result, "difference_result.txt");
+//                    System.out.println("Операция разности завершена.");
+//                    break;
+                default:
+                    System.out.println("Некорректный выбор операции, попробуйте снова");
+            }
+        }
     }
 
-    public static List<Student> readStudents(File file) {
+    private static List<Student> readStudents(File file) {
         List<Student> students = new ArrayList<>();
 
         if (!file.exists()) {
@@ -77,4 +102,22 @@ public class SetOperation {
         }
         return students;
     }
+
+    private static List<Student> union(List<Student> a, List<Student> b) {
+        Set<Student> result = new HashSet<>(a);
+        result.addAll(b);
+        return new ArrayList<>(result);
+    }
+
+    private static void saveResult(List<Student> students, String filename) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+            for (Student s : students) {
+                pw.println(s.toString());
+            }
+            System.out.println("Результат сохранён в файл: " + filename);
+        } catch (IOException e) {
+            System.err.println("Ошибка при сохранении файла: " + e.getMessage());
+        }
+    }
+
 }
