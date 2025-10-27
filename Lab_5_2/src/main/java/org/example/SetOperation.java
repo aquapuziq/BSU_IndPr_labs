@@ -17,6 +17,10 @@ public class SetOperation {
         String file2 = in.nextLine();
         File f1 = new File(file1);
         File f2 = new File(file2);
+
+        System.out.println("Введите имя файла для записи результата:");
+        String fileOut = in.nextLine();
+        File fOut = new File(fileOut);
         try {
             String invalidChars = "\"/:><\\?*";
 
@@ -27,14 +31,17 @@ public class SetOperation {
                 if (file2.indexOf(c) >= 0) {
                     throw new InvalidFileName("Введеное имя " + file2 + " содержит недопустимый элемент: " + c);
                 }
+                if (fileOut.indexOf(c) >= 0) {
+                    throw new InvalidFileName("Введеное имя " + fileOut + " содержит недопустимый элемент: " + c);
+                }
             }
             if (!f1.exists() || !f2.exists()) {
-                System.out.println("Один из файлов не найден");
+                System.out.println("Один из входных файлов не найден");
             }
-            if (!file1.endsWith(".txt") || !file2.endsWith(".txt")) {
+            if (!file1.endsWith(".txt") || !file2.endsWith(".txt") ||!fileOut.endsWith(".txt")) {
                 throw new InvalidFileName("Файлы должны иметь расширение .txt");
             }
-            if (file1.trim().isEmpty() || file2.trim().isEmpty()) {
+            if (file1.trim().isEmpty() || file2.trim().isEmpty() || fileOut.trim().isEmpty()) {
                 throw new InvalidFileName("Имя файла не может быть пустым.");
             }
         } catch (InvalidFileName e) {
@@ -61,20 +68,22 @@ public class SetOperation {
             switch (operation) {
                 case "1":
                     result = union(list1, list2);
-                    saveResult(result, "output.txt");
+                    saveResult(result, fileOut);
                     System.out.println("Операция объединения завершена");
                     status = false;
                     break;
-//                case "2":
-//                    result = intersection(list1, list2);
-//                    saveResult(result, "intersection_result.txt");
-//                    System.out.println("Операция пересечения завершена.");
-//                    break;
-//                case "3":
-//                    result = difference(list1, list2);
-//                    saveResult(result, "difference_result.txt");
-//                    System.out.println("Операция разности завершена.");
-//                    break;
+                case "2":
+                    result = intersection(list1, list2);
+                    saveResult(result, fileOut);
+                    System.out.println("Операция пересечения завершена.");
+                    status = false;
+                    break;
+                case "3":
+                    result = difference(list1, list2);
+                    saveResult(result, fileOut);
+                    System.out.println("Операция разности завершена.");
+                    status = false;
+                    break;
                 default:
                     System.out.println("Некорректный выбор операции, попробуйте снова");
             }
@@ -109,12 +118,24 @@ public class SetOperation {
         return new ArrayList<>(result);
     }
 
-    private static void saveResult(List<Student> students, String filename) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+    public static List<Student> intersection(List<Student> a, List<Student> b) {
+        Set<Student> setA = new HashSet<>(a);
+        setA.retainAll(b);
+        return new ArrayList<>(setA);
+    }
+
+    public static List<Student> difference(List<Student> a, List<Student> b) {
+        Set<Student> setA = new HashSet<>(a);
+        setA.removeAll(b);
+        return new ArrayList<>(setA);
+    }
+
+    private static void saveResult(List<Student> students, String fileName) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
             for (Student s : students) {
                 pw.println(s.toString());
             }
-            System.out.println("Результат сохранён в файл: " + filename);
+            System.out.println("Результат сохранён в файл: " + fileName);
         } catch (IOException e) {
             System.err.println("Ошибка при сохранении файла: " + e.getMessage());
         }
