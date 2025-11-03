@@ -1,0 +1,4 @@
+101323 Nikitos 6 0.5
+321321 Kirill 6 4.2
+874214 Arseniy 8 5.7
+123555 Karton 4 10.0
