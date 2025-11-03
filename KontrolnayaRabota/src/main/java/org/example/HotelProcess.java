@@ -66,7 +66,6 @@ public class HotelProcess {
                 .sorted(hotelComparator)
                 .collect(Collectors.toList());
         System.out.println("\nВсе отели: ");
-        System.out.println("Город\tНазвание\tЗвезды");
         String currentTown = "";
         for (Hotel hotel : sortedHotels) {
             if (!hotel.getTown().equals(currentTown)) {
