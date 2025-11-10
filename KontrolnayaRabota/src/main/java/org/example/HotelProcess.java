@@ -92,7 +92,7 @@ public class HotelProcess {
         } else {
             System.out.println("\nОтели в городе " + cityName + ":");
             for (Hotel hotel : cityHotels) {
-                System.out.println(hotel.getName() + ":");
+                System.out.print("название: " + hotel.getName() + ", ");
                 System.out.println("звезд: " + hotel.getZvezda());
             }
         }
@@ -112,21 +112,8 @@ public class HotelProcess {
         if (cities.isEmpty()) {
             System.out.println("Отель с названием '" + hotelName + "' не найден.");
         } else {
-            System.out.println("\nГорода с отелем '" + hotelName + ":");
+            System.out.println("\nГорода с отелем '" + hotelName + "':");
             cities.forEach(System.out::println);
-            System.out.println("Город\tЗвезды");
-            hotels.stream()
-                    .filter(hotel -> hotel.getName().equalsIgnoreCase(hotelName))
-                    .sorted(Comparator.comparing(Hotel::getTown))
-                    .forEach(hotel -> System.out.println(hotel.getTown() + " " + hotel.getZvezda()));
-        }
-    }
-
-    public static List<Hotel> getHotels() {
-        return new ArrayList<>(hotels);
-    }
-
-    public static int getHotelsCount() {
-        return hotels.size();
+             }
     }
 }
