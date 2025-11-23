@@ -6,9 +6,12 @@ import com.google.gson.reflect.TypeToken;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.BorderLayout;
 import java.io.FileReader;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.awt.BorderLayout;
 
 public class UchetkaGui extends JFrame {
 
@@ -46,6 +49,8 @@ public class UchetkaGui extends JFrame {
         model.addColumn("Оценка");
 
         loadButton.addActionListener(e -> loadJSON());
+        greatStButton.addActionListener(e -> showGreatSt());
+        exportButton.addActionListener(e -> exportGreatSt());
     }
 
     private void loadJSON() {
@@ -78,6 +83,38 @@ public class UchetkaGui extends JFrame {
                     });
                 }
             }
+        }
+    }
+    private void showGreatSt() {
+        List<Zachetka> greatStudents = new ArrayList<>();
+        for (Zachetka s : students) if (s.isGreatStudent()) greatStudents.add(s);
+        fillTable(greatStudents);
+    }
+
+
+    private void exportGreatSt() {
+        try (PrintWriter pw = new PrintWriter(new FileWriter("output.txt"))) {
+            for (Zachetka s : students) {
+                if (!s.isGreatStudent()) continue;
+
+
+                for (Zachetka.SessionRecord session : s.getSessions()) {
+                    for (Zachetka.SessionRecord.Subject sub : session.getSubjects()) {
+                        if (sub.getType().equals("экзамен")) {
+                            pw.printf("%s, Курс: %d, Группа: %s, Сессия: %d, Предмет: %s, Оценка: %d%n",
+                                    s.getFullName(),
+                                    s.getCourse(),
+                                    s.getGroup(),
+                                    session.getSessionNumber(),
+                                    sub.getName(),
+                                    sub.getGrade());
+                        }
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Файл output.txt успешно сохранён");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ошибка сохранения файла: " + ex.getMessage());
         }
     }
 
