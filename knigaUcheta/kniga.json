@@ -1,0 +1,79 @@
+[
+  {
+    "firstName": "Никита",
+    "lastName": "Бернс",
+    "middleName": "Алексеевич",
+    "course": 2,
+    "group": "6",
+    "sessions": [
+      {
+        "sessionNumber": 3,
+        "subjects": [
+          { "name": "ЧиФР", "type": "экзамен", "grade": 4, "passed": true },
+          { "name": "Политэкономия", "type": "экзамен", "grade": 10, "passed": true },
+          { "name": "Физкультура", "type": "зачет", "grade": 9, "passed": true },
+          { "name": "Диф. уравнения", "type": "зачет", "grade": 9, "passed": true },
+          { "name": "Операционные системы", "type": "экзамен", "grade": 7, "passed": true }
+        ]
+      }
+    ]
+  },
+
+  {
+    "firstName": "Ярик",
+    "lastName": "Даниеленко",
+    "middleName": "Александрович",
+    "course": 2,
+    "group": "6",
+    "sessions": [
+      {
+        "sessionNumber": 3,
+        "subjects": [
+          { "name": "ЧиФР", "type": "экзамен", "grade": 9, "passed": true },
+          { "name": "Политэкономия", "type": "экзамен", "grade": 9, "passed": true },
+          { "name": "Физкультура", "type": "зачет", "grade": 10, "passed": true },
+          { "name": "Диф. уравнения", "type": "зачет", "grade": 10, "passed": true },
+          { "name": "Операционные системы", "type": "экзамен", "grade": 9, "passed": true }
+        ]
+      }
+    ]
+  },
+  {
+    "firstName": "Кирилл",
+    "lastName": "Булынко",
+    "middleName": "Антонович",
+    "course": 2,
+    "group": "7",
+    "sessions": [
+      {
+        "sessionNumber": 3,
+        "subjects": [
+          { "name": "ЧиФР", "type": "экзамен", "grade": 6, "passed": true },
+          { "name": "Политэкономия", "type": "экзамен", "grade": 10, "passed": true },
+          { "name": "Физкультура", "type": "зачет", "grade": 8, "passed": true },
+          { "name": "Диф. уравнения", "type": "зачет", "grade": 10, "passed": true },
+          { "name": "Операционные системы", "type": "экзамен", "grade": 9, "passed": true }
+        ]
+      }
+    ]
+  },
+  {
+  "firstName": "Маша",
+  "lastName": "Копоть",
+  "middleName": "Андреевна",
+  "course": 2,
+  "group": "8",
+  "sessions": [
+    {
+      "sessionNumber": 3,
+      "subjects": [
+        { "name": "ЧиФР", "type": "экзамен", "grade": 10, "passed": true },
+        { "name": "Политэкономия", "type": "экзамен", "grade": 10, "passed": true },
+        { "name": "Физкультура", "type": "зачет", "grade": 10, "passed": true },
+        { "name": "Диф. уравнения", "type": "зачет", "grade": 10, "passed": true },
+        { "name": "Операционные системы", "type": "экзамен", "grade": 10, "passed": true }
+      ]
+    }
+  ]
+}
+]
