@@ -17,7 +17,7 @@ public class Zachetka {
 
         public static class Subject {
             private String name;
-            private String type;   // "экзамен" или "зачет"
+            private String type;
             private int grade;
             private boolean passed;
 
