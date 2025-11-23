@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
+import java.io.FileReader;
 import java.util.List;
 
 public class UchetkaGui extends JFrame {
@@ -17,7 +18,7 @@ public class UchetkaGui extends JFrame {
 
     public UchetkaGui() {
         setTitle("Табель успеваемости ФПМИ");
-        setSize(600, 600);
+        setSize(1000, 1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -44,7 +45,42 @@ public class UchetkaGui extends JFrame {
         model.addColumn("Тип");
         model.addColumn("Оценка");
 
+        loadButton.addActionListener(e -> loadJSON());
     }
+
+    private void loadJSON() {
+        try {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            java.lang.reflect.Type listType = new TypeToken<List<Zachetka>>() {}.getType();
+
+            students = gson.fromJson(new FileReader("kniga.json"), listType);
+            fillTable(students);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ошибка загрузки JSON: " + ex.getMessage());
+        }
+    }
+
+    private void fillTable(List<Zachetka> list) {
+        model.setRowCount(0);
+
+        for (Zachetka s : list) {
+            for (Zachetka.SessionRecord session : s.getSessions()) {
+                for (Zachetka.SessionRecord.Subject sub : session.getSubjects()) {
+                    model.addRow(new Object[]{
+                            s.getFullName(),
+                            s.getCourse(),
+                            s.getGroup(),
+                            session.getSessionNumber(),
+                            sub.getName(),
+                            sub.getType(),
+                            sub.getGrade()
+                    });
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new UchetkaGui().setVisible(true));
     }
