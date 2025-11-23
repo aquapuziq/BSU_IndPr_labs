@@ -75,5 +75,24 @@
       ]
     }
   ]
+},
+  {
+  "firstName": "Алиса",
+  "lastName": "Вареникова",
+  "middleName": "Николаевна",
+  "course": 2,
+  "group": "12",
+  "sessions": [
+    {
+      "sessionNumber": 3,
+      "subjects": [
+        { "name": "ЧиФР", "type": "экзамен", "grade": 6, "passed": true },
+        { "name": "Политэкономия", "type": "экзамен", "grade": 6, "passed": true },
+        { "name": "Физкультура", "type": "зачет", "grade": 8, "passed": true },
+        { "name": "Диф. уравнения", "type": "зачет", "grade": 2, "passed": false },
+        { "name": "Операционные системы", "type": "экзамен", "grade": 8, "passed": true }
+      ]
+    }
+  ]
 }
 ]
