@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.io.FileReader;
 import java.util.List;
 import java.io.FileWriter;
@@ -21,7 +22,7 @@ public class UchetkaGui extends JFrame {
 
     public UchetkaGui() {
         setTitle("Табель успеваемости ФПМИ");
-        setSize(1000, 1000);
+        setSize(677, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -36,7 +37,6 @@ public class UchetkaGui extends JFrame {
         add(top, BorderLayout.NORTH);
 
         model = new DefaultTableModel();
-        table = new JTable(model);
         JScrollPane pane = new JScrollPane(table);
         add(pane, BorderLayout.CENTER);
 
@@ -47,6 +47,21 @@ public class UchetkaGui extends JFrame {
         model.addColumn("Предмет");
         model.addColumn("Тип");
         model.addColumn("Оценка");
+
+        table = new JTable(model);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        TableColumnModel columnModel = table.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(200);
+        columnModel.getColumn(1).setPreferredWidth(50);
+        columnModel.getColumn(2).setPreferredWidth(50);
+        columnModel.getColumn(3).setPreferredWidth(50);
+        columnModel.getColumn(4).setPreferredWidth(180);
+        columnModel.getColumn(5).setPreferredWidth(80);
+        columnModel.getColumn(6).setPreferredWidth(50);
+
+        JScrollPane p = new JScrollPane(table);
+        add(p, BorderLayout.CENTER);
 
         loadButton.addActionListener(e -> loadJSON());
         greatStButton.addActionListener(e -> showGreatSt());
