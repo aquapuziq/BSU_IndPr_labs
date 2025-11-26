@@ -184,25 +184,61 @@ public class Calculator extends JFrame {
 
     private void calculateFunc() {
         try {
-            String expression = nowInput.replaceAll("\\s+", "");
-            String[] parts = expression.split("[+\\-*/]");
+            String expr = nowInput.replace(" ", "");
 
-            if (parts.length < 2) return;
+            java.util.List<Double> numbers = new java.util.ArrayList<>();
+            java.util.List<Character> operations = new java.util.ArrayList<>();
+            StringBuilder num = new StringBuilder();
 
-            double firstNum = Double.parseDouble(parts[0]);
-            double secondNum = Double.parseDouble(parts[1]);
-            String operator = extractOp(expression);
+            for (char c : expr.toCharArray()) {
+                if ("+-*/".indexOf(c) >= 0) {
+                    numbers.add(Double.parseDouble(num.toString()));
+                    num.setLength(0);
+                    operations.add(c);
+                } else {
+                    num.append(c);
+                }
+            }
+            numbers.add(Double.parseDouble(num.toString()));
 
-            double calculatedResult = performOp(firstNum, secondNum, operator);
+            for (int i = 0; i < operations.size(); ) {
+                char op = operations.get(i);
+                if (op == '*' || op == '/') {
+                    double a = numbers.get(i);
+                    double b = numbers.get(i + 1);
 
-            if (calculatedResult == (long) calculatedResult) {
-                nowInput = String.valueOf((long) calculatedResult);
+                    double res = performOp(a, b, String.valueOf(op));
+
+                    numbers.set(i, res);
+                    numbers.remove(i + 1);
+                    operations.remove(i);
+                } else {
+                    i++;
+                }
+            }
+
+            while (!operations.isEmpty()) {
+                char op = operations.get(0);
+                double a = numbers.get(0);
+                double b = numbers.get(1);
+
+                double res = performOp(a, b, String.valueOf(op));
+
+                numbers.set(0, res);
+                numbers.remove(1);
+                operations.remove(0);
+            }
+
+            double resultValue = numbers.get(0);
+
+            if (resultValue == (long) resultValue) {
+                nowInput = String.valueOf((long) resultValue);
             } else {
-                nowInput = String.valueOf(calculatedResult);
+                nowInput = String.valueOf(resultValue);
             }
 
             display.setText(nowInput);
-            result = calculatedResult;
+            result = resultValue;
             lastOp = "";
             startNew = true;
 
@@ -210,14 +246,6 @@ public class Calculator extends JFrame {
             display.setText("Error");
             resetCalculator();
         }
-    }
-    private String extractOp(String expression) {
-        for (char c : expression.toCharArray()) {
-            if ("+-*/".indexOf(c) != -1) {
-                return String.valueOf(c);
-            }
-        }
-        return "";
     }
 
     private double performOp(double a, double b, String operator) {
