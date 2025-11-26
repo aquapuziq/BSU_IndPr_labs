@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 public class Calculator extends JFrame {
     private JTextField display;
     private String nowInput = "";
+    private String fullInput = "";
     private double result = 0;
     private String lastOp = "";
     private boolean startNew = true;
@@ -87,7 +88,7 @@ public class Calculator extends JFrame {
                 } else {
                     nowInput += digit;
                 }
-                display.setText(nowInput);
+                display.setText(fullInput + nowInput);
             }
         };
 
@@ -111,7 +112,7 @@ public class Calculator extends JFrame {
                 } else if (!nowInput.contains(".")) {
                     nowInput += ".";
                 }
-                display.setText(nowInput);
+                display.setText(fullInput + nowInput);
             }
         });
 
@@ -120,17 +121,13 @@ public class Calculator extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String operator = ((JButton) e.getSource()).getText();
 
-                if (!nowInput.isEmpty() && !lastCharOp()) {
-                    if (!lastOp.isEmpty()) {
-                        calculate();
-                    } else {
-                        result = Double.parseDouble(nowInput);
-                    }
-                    lastOp = operator;
-                    nowInput += " " + operator + " ";
-                    display.setText(nowInput);
-                    startNew = true;
+                if (!nowInput.isEmpty()) {
+                    fullInput += nowInput + " " + operator + " ";
+                    nowInput = "";
+                    display.setText(fullInput);
                 }
+                lastOp = operator;
+                startNew = true;
             }
         };
 
@@ -147,7 +144,7 @@ public class Calculator extends JFrame {
                         double value = Double.parseDouble(nowInput);
                         value = value / 100;
                         nowInput = String.valueOf(value);
-                        display.setText(nowInput);
+                        display.setText(fullInput + nowInput);
                     } catch (NumberFormatException ex) {
                         display.setText("Error");
                         resetCalculator();
@@ -159,9 +156,13 @@ public class Calculator extends JFrame {
         equal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!nowInput.isEmpty() && !lastOp.isEmpty()) {
-                    calculateFunc();
-                }
+                String expr = fullInput + nowInput;
+
+                nowInput = expr.replace(" ", "");
+                calculateFunc();
+
+                fullInput = "";
+                startNew = true;
             }
         });
 
@@ -180,11 +181,6 @@ public class Calculator extends JFrame {
         display.setText("0");
     }
 
-    private boolean lastCharOp() {
-        if (nowInput.isEmpty()) return false;
-        String lastChar = nowInput.substring(nowInput.length() - 1);
-        return "+-*/".contains(lastChar);
-    }
 
     private void calculateFunc() {
         try {
@@ -215,7 +211,6 @@ public class Calculator extends JFrame {
             resetCalculator();
         }
     }
-
     private String extractOp(String expression) {
         for (char c : expression.toCharArray()) {
             if ("+-*/".indexOf(c) != -1) {
@@ -237,31 +232,9 @@ public class Calculator extends JFrame {
         }
     }
 
-    private void calculate() {
-        if (nowInput.isEmpty() || lastOp.isEmpty()) return;
-
-        try {
-            String numberPart = nowInput.substring(0, nowInput.lastIndexOf(lastOp)).trim();
-            double currentValue = Double.parseDouble(numberPart);
-            double secondValue = Double.parseDouble(nowInput.substring(nowInput.lastIndexOf(lastOp) + 1).trim());
-
-            result = performOp(currentValue, secondValue, lastOp);
-
-            if (result == (long) result) {
-                nowInput = String.valueOf((long) result);
-            } else {
-                nowInput = String.valueOf(result);
-            }
-            display.setText(nowInput);
-
-        } catch (Exception ex) {
-            display.setText("Error");
-            resetCalculator();
-        }
-    }
-
     private void resetCalculator() {
         nowInput = "";
+        fullInput = "";
         result = 0;
         lastOp = "";
         startNew = true;
