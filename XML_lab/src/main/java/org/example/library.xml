@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<library>
+    <book id="1">
+        <title>Java Programming</title>
+        <author>James Gosling</author>
+        <year>2020</year>
+        <price>49.99</price>
+        <quantity>6</quantity>
+        <instock>4</instock>
+        <category>programming</category>
+    </book>
+
+    <book id="2">
+        <title>Design Patterns</title>
+        <author>Erich Gamma</author>
+        <year>1994</year>
+        <price>39.99</price>
+        <quantity>5</quantity>
+        <instock>2</instock>
+        <category>computer-science</category>
+    </book>
+
+    <book id="3">
+        <title>Contributing to Eclipse: Principles, Patterns, and Plug-ins</title>
+        <author>Erich Gamma</author>
+        <year>2003</year>
+        <price>19.99</price>
+        <quantity>5</quantity>
+        <instock>5</instock>
+        <category>programming</category>
+    </book>
+
+    <book id="4">
+        <title>The C++ Programming Language</title>
+        <author>bjarne stroustrup </author>
+        <year>1986</year>
+        <price>39.99</price>
+        <quantity>10</quantity>
+        <instock>3</instock>
+        <category>programming</category>
+    </book>
+
+    <book id="5">
+        <title>The Brothers Karamazov</title>
+        <author>Fyodor Dostoevsky</author>
+        <year>1880</year>
+        <price>17.99</price>
+        <quantity>12</quantity>
+        <instock>6</instock>
+        <category>novel</category>
+    </book>
+
+    <book id="6">
+        <title>Crime and Punishment</title>
+        <author>Fyodor Dostoevsky</author>
+        <year>1866</year>
+        <price>18.99</price>
+        <quantity>15</quantity>
+        <instock>3</instock>
+        <category>novel</category>
+    </book>
+
+    <book id="7">
+        <title>The Double</title>
+        <author>Fyodor Dostoevsky</author>
+        <year>1846</year>
+        <price>9.99</price>
+        <quantity>4</quantity>
+        <instock>3</instock>
+        <category>novel</category>
+    </book>
+
+    <book id="8">
+        <title>The Fountainhead</title>
+        <author>Ayn Rand</author>
+        <year>1943</year>
+        <price>29.99</price>
+        <quantity>10</quantity>
+        <instock>7</instock>
+        <category>novel</category>
+    </book>
+
+    <book id="9">
+        <title>The Plague</title>
+        <author>Albert Camus</author>
+        <year>1947</year>
+        <price>29.99</price>
+        <quantity>7</quantity>
+        <instock>2</instock>
+        <category>novel</category>
+    </book>
+
+    <book id="10">
+        <title>The Outsider</title>
+        <author>Albert Camus</author>
+        <year>1942</year>
+        <price>5.99</price>
+        <quantity>7</quantity>
+        <instock>0</instock>
+        <category>novel</category>
+    </book>
+
+    <book id="11">
+        <title>Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow</title>
+        <author>Aurélien Géron</author>
+        <year>2017</year>
+        <price>39.99</price>
+        <quantity>5</quantity>
+        <instock>3</instock>
+        <category>computer-science</category>
+    </book>
+
+    <book id="12">
+        <title>The Glass Bead Game</title>
+        <author>Hermann Hesse</author>
+        <year>1931</year>
+        <price>17.99</price>
+        <quantity>4</quantity>
+        <instock>0</instock>
+        <category>novel</category>
+    </book>
+
+    <book id="13">
+        <title>the epic Faust (Parts I, II)</title>
+        <author>Johann Wolfgang von Goethe</author>
+        <year>1832</year>
+        <price>14.99</price>
+        <quantity>6</quantity>
+        <instock>4</instock>
+        <category>poem</category>
+    </book>
+
+    <book id="14">
+        <title>We</title>
+        <author>Yevgeny Zamyatin</author>
+        <year>1924</year>
+        <price>10.99</price>
+        <quantity>6</quantity>
+        <instock>2</instock>
+        <category>novel</category>
+    </book>
+
+    <book id="15">
+        <title>Maxims and Reflections</title>
+        <author>Johann Wolfgang von Goethe</author>
+        <year>1833</year>
+        <price>20.99</price>
+        <quantity>2</quantity>
+        <instock>0</instock>
+        <category>essays</category>
+    </book>
+</library>
