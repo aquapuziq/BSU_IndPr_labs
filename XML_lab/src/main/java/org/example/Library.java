@@ -55,4 +55,40 @@ public class Library {
             return false;
         }
     }
+
+    public List<Book> getBooks() { return books; }
+
+    public void addBook(Book book) { books.add(book); }
+
+    public List<Book> searchByAuthor(String author) {
+        List<Book> result = new ArrayList<>();
+        for (Book b : books) if (b.getAuthor().equalsIgnoreCase(author)) result.add(b);
+        return result;
+    }
+
+    public List<Book> searchByYear(int year) {
+        List<Book> result = new ArrayList<>();
+        for (Book b : books) if (b.getYear() == year) result.add(b);
+        return result;
+    }
+
+    public List<Book> searchByCategory(String category) {
+        List<Book> result = new ArrayList<>();
+        for (Book b : books) if (b.getCategory().equalsIgnoreCase(category)) result.add(b);
+        return result;
+    }
+
+    public void changePrice(int id, double newPrice) {
+        for (Book b : books) if (b.getId() == id) b.setPrice(newPrice);
+    }
+
+    public boolean issueBook(int id) {
+        for (Book b : books) {
+            if (b.getId() == id && b.getInStock() > 0) {
+                b.setInStock(b.getInStock() - 1);
+                return true;
+            }
+        }
+        return false;
+    }
 }
