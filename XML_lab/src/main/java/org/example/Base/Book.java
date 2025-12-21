@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Base;
 
 public class Book {
     private int id;

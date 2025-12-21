@@ -112,7 +112,6 @@ public class UchetkaGui extends JFrame {
             for (Zachetka s : students) {
                 if (!s.isGreatStudent()) continue;
 
-
                 for (Zachetka.SessionRecord session : s.getSessions()) {
                     for (Zachetka.SessionRecord.Subject sub : session.getSubjects()) {
                         if (sub.getType().equals("экзамен")) {

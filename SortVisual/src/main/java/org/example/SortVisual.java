@@ -7,8 +7,8 @@ import java.util.Random;
 public class SortVisual extends JPanel {
 
     private int[] array;
-    private int arraySize = 50;
-    private int delay = 200;
+    private int arraySize = 500;
+    private int delay = 10;
 
     public SortVisual() {
         generateArray();

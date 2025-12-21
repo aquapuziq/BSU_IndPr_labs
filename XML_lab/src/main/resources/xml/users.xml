@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+    <user id="1">
+        <login>admin</login>
+        <password>louvre</password>
+        <role>LIBRARIAN</role>
+        <issuedBooks/>
+    </user>
+
+    <user id="2">
+        <login>reader</login>
+        <password>1234</password>
+        <role>READER</role>
+        <issuedBooks>
+            <bookId>5</bookId>
+        </issuedBooks>
+    </user>
+</users>

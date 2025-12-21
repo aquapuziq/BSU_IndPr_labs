@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.Base.Book;
+import org.example.Base.Library;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -19,7 +22,7 @@ public class LibraryGUI extends JFrame {
         }
 
         setTitle("Библиотека");
-        setSize(900, 500);
+        setSize(773, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
